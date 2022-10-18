@@ -19,3 +19,8 @@ doc/api/
 *.js_
 *.js.deps
 *.js.map
+*.jks
+*.DS_Store
+ios/Podfile.lock
+.flutter-plugins-dependencies
+.flutter-plugins

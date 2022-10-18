@@ -1,0 +1,45 @@
+const Map<String, String> zh_Hans = {
+  'PleaseEnterYourMobileNumber': '请输入您的手机号',
+  'LocalNumberOne-clickLogin': '本机号码一键登录',
+  'EnterVerificationCode': '输入验证码',
+  'DoNotFrequentlyObtainTheVerificationCode': '请勿频繁获取验证码',
+  'PleaseSelectConsentAuthorizationFirst': '请先勾选同意授权',
+  'TheFormatOfThePhoneNumberIsIncorrect': '手机号格式不正确',
+
+  'Agree': '同意',
+  'UserServiceAgreement': '用户服务协议',
+  'AndAuthorizeTheUseOfYourCellPhoneNumber': '并授权使用您的手机号',
+  'VerificationCodeLogin': '验证码登陆',
+
+  'GetCode': '获取验证码',
+
+  'Sun.': '日',
+  'Mon.': '一',
+  'Tues.': '二',
+  'Wed.': '三',
+  'Thur.': '四',
+  'Fri.': '五',
+  'Sat.': '六',
+
+  'AddTask': '添加事项...',
+  'Add': '添加',
+  'Modify': '修改',
+  'Update': '更新',
+  'Delete': '删除',
+  'Complete': '完成',
+
+  'RefreshSucceeded': '刷新成功',
+  'PersonalInformation': '个人信息',
+  'PleaseUploadThePictureBeforePreviewing': '请上传图片后再预览',
+  'PleaseEnterYourName': '请输入姓名',
+  'PleaseEnterAnIntroduction': '请输入简介',
+  'Edit': '编辑',
+  'Preview': '预览',
+  'RealName': '真实姓名',
+  'AboutMe': '关于我',
+  'EditPersonalProfile': '编辑个人档案',
+
+  'Setting': '设置',
+  'ClearCache': '清理缓存',
+  'LogOut': '退出登录',
+};
