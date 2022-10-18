@@ -15,6 +15,8 @@ class MainController extends BaseController {
 
   List<Member> allMember = [];
 
+  Member temAddMember = Member(id: 0, card: "", name: "");
+
   RxList<Member> resultMember = RxList<Member>([]);
 
   // 加载数据
@@ -28,9 +30,10 @@ class MainController extends BaseController {
   }
 
   // 添加数据
-  void addMember(Member member) async {
-    await ATQueueData.insertData(member);
+  void addMember() async {
+    await ATQueueData.insertData(temAddMember);
     initAllMember();
+    temAddMember.clear();
   }
 
   // 删除数据

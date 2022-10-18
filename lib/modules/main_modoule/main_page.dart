@@ -56,6 +56,7 @@ class MainPage extends BasePage<MainController>{
           right: 20.dp,
           child: FloatingActionButton(
             onPressed: () async{
+              controller.temAddMember.clear();
               await _addMember(Get.context);
             },
             child: const Icon(Icons.add),
@@ -180,10 +181,6 @@ class MainPage extends BasePage<MainController>{
       showDialog<void>(
         context: context,
         builder: (BuildContext context) {
-          String name = "";
-          String card = "";
-          String phone = "";
-          int count = 0;
           return SimpleDialog(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.dp),
@@ -208,7 +205,7 @@ class MainPage extends BasePage<MainController>{
                         Expanded(child: TextField(
                           keyboardType: TextInputType.text,
                           onChanged: (v){
-                            name = v;
+                            controller.temAddMember.name = v;
                           },
                           decoration: InputDecoration.collapsed(
                               hintText: Translation.nameHintText,
@@ -233,7 +230,7 @@ class MainPage extends BasePage<MainController>{
                         Expanded(child: TextField(
                           keyboardType: TextInputType.text,
                           onChanged: (v){
-                            card = v;
+                            controller.temAddMember.card = v;
                           },
                           decoration: InputDecoration.collapsed(
                               hintText: Translation.cardHintText,
@@ -261,7 +258,7 @@ class MainPage extends BasePage<MainController>{
                             FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))//设置只允许输入数字
                           ],
                           onChanged: (v){
-                            phone = v;
+                            controller.temAddMember.phone = v;
                           },
                           decoration: InputDecoration.collapsed(
                               hintText: Translation.phoneHintText,
@@ -290,9 +287,9 @@ class MainPage extends BasePage<MainController>{
                           ],
                           onChanged: (v){
                             if(v.isNotEmpty) {
-                              count = int.parse(v);
+                              controller.temAddMember.count = int.parse(v);
                             } else {
-                              count = 0;
+                              controller.temAddMember.count = 0;
                             }
                           },
                           decoration: InputDecoration.collapsed(
@@ -323,9 +320,8 @@ class MainPage extends BasePage<MainController>{
                         ),
                         GestureDetector(
                             onTap: () {
-                              if(name.isNotEmpty && card.isNotEmpty && phone.isNotEmpty){
-                                Member member = Member(id: 0, card: card, name: name, phone: phone, count: count);
-                                controller.addMember(member);
+                              if(controller.temAddMember.checkComplete()){
+                                controller.addMember();
                                 Navigator.of(context).pop();
                               }
                             },
@@ -344,12 +340,12 @@ class MainPage extends BasePage<MainController>{
 
   // 增加或兑换积分
   _addOrReduceMemberCount(context, {required Member member, bool add = true}){
+    int changeValue = 0;
+    String note = "";
     return
       showDialog<void>(
         context: context,
         builder: (BuildContext context) {
-          int changeValue = 0;
-          String note = "";
           return SimpleDialog(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.dp),

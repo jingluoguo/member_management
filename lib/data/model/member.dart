@@ -38,13 +38,6 @@ class Member {
     return data;
   }
 
-  String toInsert() {
-    return '''insert or replace into member_info (
-        id,card,name,count,phone,
-        address,note)
-        values (null,$card,$name,$count,$phone,$address,$note)''';
-  }
-
   bool checkContainKey(String key) {
     if(key == ""){
       return true;
@@ -55,6 +48,21 @@ class Member {
       return true;
     }
     return false;
+  }
+
+  bool checkComplete(){
+    if(card!.isNotEmpty && name!.isNotEmpty && phone!.isNotEmpty) return true;
+    return false;
+  }
+
+  void clear() {
+    id = 0;
+    card = '';
+    count = 0;
+    name = '';
+    phone = '';
+    address = '';
+    note = '';
   }
 }
 
