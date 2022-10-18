@@ -2,46 +2,29 @@
 /// Description：翻译文本
 /// Date：2021/7/29
 
-/// 第三方
 import 'package:get/get.dart';
 
 class Translation{
-  static final String pleaseEnterYourMobileNumber = 'PleaseEnterYourMobileNumber'.tr;
-  static final String localNumberOneClickLogin = 'LocalNumberOne-clickLogin'.tr;
-  static final String enterVerificationCode = 'EnterVerificationCode'.tr;
-  static final String doNotFrequentlyObtainTheVerificationCode = 'DoNotFrequentlyObtainTheVerificationCode'.tr;
-  static final String pleaseSelectConsentAuthorizationFirst = 'PleaseSelectConsentAuthorizationFirst'.tr;
-  static final String theFormatOfThePhoneNumberIsIncorrect = 'TheFormatOfThePhoneNumberIsIncorrect'.tr;
-  static final String agree = 'Agree'.tr;
-  static final String userServiceAgreement = 'UserServiceAgreement'.tr;
-  static final String andAuthorizeTheUseOfYourCellPhoneNumber = 'AndAuthorizeTheUseOfYourCellPhoneNumber'.tr;
-  static final String verificationCodeLogin = 'VerificationCodeLogin'.tr;
-  static final String getCode = 'GetCode'.tr;
+  static final String memberList = 'member_list'.tr;
+  static final String pointsRecord = 'points_record'.tr;
 
-  static final String sunday = 'Sun.'.tr;
-  static final String monday = 'Mon.'.tr;
-  static final String tuesday = 'Tues.'.tr;
-  static final String wednesday = 'Wed.'.tr;
-  static final String thursday = 'Thur.'.tr;
-  static final String friday = 'Fri.'.tr;
-  static final String saturday = 'Sat.'.tr;
-  static final String addTask = 'AddTask'.tr;
-  static final String add = 'Add'.tr;
-  static final String modify = 'Modify'.tr;
-  static final String delete = 'Delete'.tr;
-  static final String complete = 'Complete'.tr;
-  static final String refreshSucceeded = 'RefreshSucceeded'.tr;
-  static final String personalInformation = 'PersonalInformation'.tr;
-  static final String edit = 'Edit'.tr;
-  static final String update = 'Update'.tr;
-  static final String preview = 'Preview'.tr;
-  static final String realName = 'RealName'.tr;
-  static final String aboutMe = 'AboutMe'.tr;
-  static final String setting = 'Setting'.tr;
-  static final String clearCache = 'ClearCache'.tr;
-  static final String logOut = 'LogOut'.tr;
-  static final String pleaseUploadThePictureBeforePreviewing = 'PleaseUploadThePictureBeforePreviewing'.tr;
-  static final String pleaseEnterYourName = 'PleaseEnterYourName'.tr;
-  static final String pleaseEnterAnIntroduction = 'PleaseEnterAnIntroduction'.tr;
-  static final String editPersonalProfile = 'EditPersonalProfile'.tr;
+  static final String searchHintText = 'search_hint_text'.tr;
+  static final String addMember = 'add_member'.tr;
+  static final String name = 'name'.tr;
+  static final String nameHintText = 'name_hint_text'.tr;
+  static final String cardNumber = 'card_number'.tr;
+  static final String cardHintText = 'card_hint_text'.tr;
+  static final String phone = 'phone'.tr;
+  static final String phoneHintText = 'phone_hint_text'.tr;
+  static final String count = 'count'.tr;
+  static final String countHintText = 'count_hint_text'.tr;
+
+  static final String changePoints = 'change_points'.tr;
+  static final String changePointsReason = 'change_points_reason'.tr;
+
+  static final String delete = 'delete'.tr;
+  static final String cancel = 'cancel'.tr;
+  static final String confirm = 'confirm'.tr;
+  static final String add = 'add'.tr;
+  static final String exchange = 'exchange'.tr;
 }

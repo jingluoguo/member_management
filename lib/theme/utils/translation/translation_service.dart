@@ -1,4 +1,3 @@
-/// 第三方
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +8,7 @@ import 'zh_HK.dart';
 
 class TranslationService extends Translations {
   static Locale? get locale => Get.deviceLocale;
-  static final fallbackLocale = Locale('zh', '');
+  static const fallbackLocale = Locale('zh', '');
   @override
   Map<String, Map<String, String>> get keys => {
     'en': en_US,

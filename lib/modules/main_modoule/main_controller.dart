@@ -1,5 +1,7 @@
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+
+import 'package:member_management/core/base_controller.dart';
 import 'package:member_management/data/model/member.dart';
 import 'package:member_management/utils/method/sqflite.dart';
 
@@ -7,7 +9,7 @@ import 'package:member_management/utils/method/sqflite.dart';
 ///
 /// todo
 
-class MainController extends GetxController {
+class MainController extends BaseController {
 
   SlidableController slidableController = SlidableController();
 

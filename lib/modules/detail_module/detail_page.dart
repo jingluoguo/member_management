@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+import 'package:member_management/core/base_page.dart';
 import 'package:member_management/modules/detail_module/detail_controller.dart';
 import 'package:member_management/modules/main_modoule/main_controller.dart';
 
@@ -13,48 +14,37 @@ import 'package:member_management/data/model/member.dart';
 ///
 /// todo
 
-class DetailPage extends GetWidget<DetailController> {
+class DetailPage extends BasePage<DetailController> {
   const DetailPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return customerTheme(
-        false,
-        SystemUiOverlayStyle.dark,
-        Stack(
-          children: [
-            Column(
-              children: [
-                safePadding(context, Colors.white),
-                customerHeader(
-                    context,
-                    Colors.white,
-                    "积分变更记录",
-                  leftContent: GestureDetector(
-                    onTap: ()=>Get.back(),
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      size: 28.dp,
-                    ),
-                  )
+  Widget get body => Stack(
+    children: [
+      Column(
+        children: [
+          customerHeader(
+              Colors.white,
+              Translation.pointsRecord,
+              leftContent: GestureDetector(
+                onTap: ()=>Get.back(),
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  size: 28.dp,
                 ),
-                Expanded(child: SingleChildScrollView(
-                  child: Obx(()=>Column(
-                    children: [
-                      for(var record in controller.allRecord)
-                        memberRecordCard(record),
-                    ],
-                  )),
-                ))
+              )
+          ),
+          Expanded(child: SingleChildScrollView(
+            child: Obx(()=>Column(
+              children: [
+                for(var record in controller.allRecord)
+                  memberRecordCard(record),
               ],
-            ),
-          ],
-        ),
-      onTap: ()=>{
-        FocusScope.of(context).requestFocus(FocusNode())
-      }
-    );
-  }
+            )),
+          ))
+        ],
+      ),
+    ],
+  );
 
   Widget memberRecordCard(MemberRecord record){
     return Padding(

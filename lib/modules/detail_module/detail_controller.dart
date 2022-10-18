@@ -1,5 +1,6 @@
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+import 'package:member_management/core/base_controller.dart';
 import 'package:member_management/data/model/member.dart';
 import 'package:member_management/utils/method/sqflite.dart';
 
@@ -7,7 +8,7 @@ import 'package:member_management/utils/method/sqflite.dart';
 ///
 /// todo
 
-class DetailController extends GetxController {
+class DetailController extends BaseController {
 
   SlidableController slidableController = SlidableController();
 
@@ -16,7 +17,6 @@ class DetailController extends GetxController {
   // 加载数据
   void initAllMember(int id) async {
     allRecord.clear();
-    print('这里的值：$id');
     allRecord.value = await ATQueueData.searchRecordDates(id);
   }
 

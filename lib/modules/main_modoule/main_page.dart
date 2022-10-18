@@ -2,75 +2,67 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
-import 'package:member_management/modules/main_modoule/main_controller.dart';
-import 'package:member_management/routes/app_pages.dart';
+import 'package:member_management/core/base_page.dart';
 
-import '../../utils/widget/common.dart';
-import '../../theme/utils/export.dart';
+import 'main_controller.dart';
+import 'package:member_management/routes/app_pages.dart';
+import 'package:member_management/theme/utils/export.dart';
 import 'package:member_management/data/model/member.dart';
+import 'package:member_management/utils/widget/common.dart';
 
 /// guoshijun created this file at 2022/10/3 22:41
 ///
-/// todo
+/// 会员列表及相关操作
 
-class MainPage extends GetWidget<MainController> {
+class MainPage extends BasePage<MainController>{
   const MainPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return customerTheme(
-        false,
-        SystemUiOverlayStyle.dark,
-        Stack(
-          children: [
-            Column(
+  // TODO: implement body
+  Widget get body => Stack(
+    children: [
+      Column(
+        children: [
+          // safePadding(context, Colors.white),
+          customerHeader(Colors.white, Translation.memberList),
+          Get.getHeightBox(10.dp),
+          SizedBox(
+            width: Get.width * 0.9,
+            child: TextField(
+              onChanged: (v){
+                controller.searchMember(v);
+              },
+              decoration: InputDecoration.collapsed(
+                  hintText: Translation.searchHintText,
+                  hintStyle: TextStyle(
+                      color: c_AA,
+                      fontSize: 16.sp
+                  )
+              ),
+            ),
+          ),
+          Expanded(child: SingleChildScrollView(
+            child: Obx(()=>Column(
               children: [
-                safePadding(context, Colors.white),
-                customerHeader(context, Colors.white, "会员列表"),
-                Get.getHeightBox(10.dp),
-                SizedBox(
-                  width: Get.width * 0.9,
-                  child: TextField(
-                    onChanged: (v){
-                      controller.searchMember(v);
-                    },
-                    decoration: InputDecoration.collapsed(
-                        hintText: "编号/姓名/手机号",
-                        hintStyle: TextStyle(
-                            color: c_AA,
-                            fontSize: 16.sp
-                        )
-                    ),
-                  ),
-                ),
-                Expanded(child: SingleChildScrollView(
-                  child: Obx(()=>Column(
-                    children: [
-                      for(var member in controller.resultMember)
-                        memberCard(member),
-                    ],
-                  )),
-                ))
+                for(var member in controller.resultMember)
+                  memberCard(member),
               ],
-            ),
-            Positioned(
-              bottom: 50.dp,
-              right: 20.dp,
-              child: FloatingActionButton(
-                onPressed: () async{
-                  await _addMember(context);
-                  // controller.addMember(Member(id: 1, card: "X0001", name: "jingluo", phone: "13111111111"));
-                },
-                child: const Icon(Icons.add),
-              )
-            ),
-          ],
-        ),
-      onTap: ()=>{
-        FocusScope.of(context).requestFocus(FocusNode())
-      }
-    );
-  }
+            )),
+          ))
+        ],
+      ),
+      Positioned(
+          bottom: 50.dp,
+          right: 20.dp,
+          child: FloatingActionButton(
+            onPressed: () async{
+              await _addMember(Get.context);
+            },
+            child: const Icon(Icons.add),
+          )
+      ),
+    ],
+  );
 
   Widget memberCard(Member member){
     return Padding(
@@ -137,7 +129,7 @@ class MainPage extends GetWidget<MainController> {
                       borderRadius: BorderRadius.all(Radius.circular(10.0))
                   ),
                   child: Center(
-                    child: singleTextWeight("积分", Colors.black, 16.dp),
+                    child: singleTextWeight(Translation.add, Colors.black, 16.dp),
                   )
               ),
             ),
@@ -153,7 +145,7 @@ class MainPage extends GetWidget<MainController> {
                       borderRadius: BorderRadius.all(Radius.circular(10.0))
                   ),
                   child: Center(
-                    child: singleTextWeight("兑换", Colors.black, 16.dp),
+                    child: singleTextWeight(Translation.exchange, Colors.black, 16.dp),
                   )
               ),
             ),
@@ -203,7 +195,7 @@ class MainPage extends GetWidget<MainController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Get.getHeightBox(20.dp),
-                  singleTextWeight("添加用户", c_00, 18.dp, fontWeight: FontWeight.bold),
+                  singleTextWeight(Translation.addMember, c_00, 18.dp, fontWeight: FontWeight.bold),
                   Get.getHeightBox(10.dp),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.6,
@@ -211,7 +203,7 @@ class MainPage extends GetWidget<MainController> {
                       children: [
                         SizedBox(
                             width: MediaQuery.of(context).size.width * 0.15,
-                            child: const Text("姓名：",textAlign: TextAlign.right,)
+                            child: Text("${Translation.name}：",textAlign: TextAlign.right,)
                         ),
                         Expanded(child: TextField(
                           keyboardType: TextInputType.text,
@@ -219,7 +211,7 @@ class MainPage extends GetWidget<MainController> {
                             name = v;
                           },
                           decoration: InputDecoration.collapsed(
-                              hintText: "请输入姓名",
+                              hintText: Translation.nameHintText,
                               hintStyle: TextStyle(
                                   color: c_AA,
                                   fontSize: 16.sp
@@ -236,7 +228,7 @@ class MainPage extends GetWidget<MainController> {
                       children: [
                         SizedBox(
                             width: MediaQuery.of(context).size.width * 0.15,
-                            child: const Text("卡号：",textAlign: TextAlign.right,)
+                            child: Text("${Translation.cardNumber}：",textAlign: TextAlign.right,)
                         ),
                         Expanded(child: TextField(
                           keyboardType: TextInputType.text,
@@ -244,7 +236,7 @@ class MainPage extends GetWidget<MainController> {
                             card = v;
                           },
                           decoration: InputDecoration.collapsed(
-                              hintText: "请输入卡号",
+                              hintText: Translation.cardHintText,
                               hintStyle: TextStyle(
                                   color: c_AA,
                                   fontSize: 16.sp
@@ -261,7 +253,7 @@ class MainPage extends GetWidget<MainController> {
                       children: [
                         SizedBox(
                             width: MediaQuery.of(context).size.width * 0.15,
-                            child: const Text("手机号：",textAlign: TextAlign.right,)
+                            child: Text("${Translation.phone}：",textAlign: TextAlign.right,)
                         ),
                         Expanded(child: TextField(
                           keyboardType: TextInputType.number, //设置键盘为数字
@@ -272,7 +264,7 @@ class MainPage extends GetWidget<MainController> {
                             phone = v;
                           },
                           decoration: InputDecoration.collapsed(
-                              hintText: "请输入手机号",
+                              hintText: Translation.phoneHintText,
                               hintStyle: TextStyle(
                                   color: c_AA,
                                   fontSize: 16.sp
@@ -289,7 +281,7 @@ class MainPage extends GetWidget<MainController> {
                       children: [
                         SizedBox(
                             width: MediaQuery.of(context).size.width * 0.15,
-                            child: const Text("积分：",textAlign: TextAlign.right,)
+                            child: Text("${Translation.count}：",textAlign: TextAlign.right,)
                         ),
                         Expanded(child: TextField(
                           keyboardType: TextInputType.number, //设置键盘为数字
@@ -304,7 +296,7 @@ class MainPage extends GetWidget<MainController> {
                             }
                           },
                           decoration: InputDecoration.collapsed(
-                              hintText: "请输积分，默认为0",
+                              hintText: Translation.countHintText,
                               hintStyle: TextStyle(
                                   color: c_AA,
                                   fontSize: 16.sp
@@ -322,7 +314,7 @@ class MainPage extends GetWidget<MainController> {
                       children: [
                         GestureDetector(
                             onTap: ()=> Navigator.of(context).pop(),
-                            child: singleTextWeight("取消", c_757676, 18.dp, fontWeight: FontWeight.normal)
+                            child: singleTextWeight(Translation.cancel, c_757676, 18.dp, fontWeight: FontWeight.normal)
                         ),
                         Container(
                           height: 60.dp,
@@ -337,7 +329,7 @@ class MainPage extends GetWidget<MainController> {
                                 Navigator.of(context).pop();
                               }
                             },
-                            child: singleTextWeight("确定", c_5ADBEA, 18.dp, fontWeight: FontWeight.normal)
+                            child: singleTextWeight(Translation.confirm, c_5ADBEA, 18.dp, fontWeight: FontWeight.normal)
                         ),
                       ],
                     ),
@@ -369,7 +361,7 @@ class MainPage extends GetWidget<MainController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Get.getHeightBox(20.dp),
-                  singleTextWeight("变更积分", c_00, 18.dp, fontWeight: FontWeight.bold),
+                  singleTextWeight(Translation.changePoints, c_00, 18.dp, fontWeight: FontWeight.bold),
                   Get.getHeightBox(10.dp),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.6,
@@ -379,7 +371,7 @@ class MainPage extends GetWidget<MainController> {
                         note = v;
                       },
                       decoration: InputDecoration.collapsed(
-                          hintText: "请输入变更原因",
+                          hintText: Translation.changePointsReason,
                           hintStyle: TextStyle(
                               color: c_AA,
                               fontSize: 16.sp
@@ -396,7 +388,13 @@ class MainPage extends GetWidget<MainController> {
                         FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))//设置只允许输入数字
                       ],
                       onChanged: (v){
-                        changeValue = int.parse(v).abs();
+                        if(v.isEmpty) {
+                          changeValue = 0;
+                          return;
+                        }
+                        print("到这里了？$v");
+                        var value = int.parse(v);
+                        changeValue = value.abs();
                         if(add){
                           print("新增积分:$v");
                         } else {
@@ -439,6 +437,7 @@ class MainPage extends GetWidget<MainController> {
                               }
                               member.count = member.count - changeValue;
                             }
+                            print("这里的最终值:${member.count}   $changeValue");
                             controller.updateMember(member, add? changeValue : (-changeValue), note: note);
                             Navigator.of(context).pop();
                           },
