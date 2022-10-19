@@ -70,6 +70,8 @@ class MainPage extends BasePage<MainController>{
       padding: EdgeInsets.only(top: 10.dp, bottom: 10.dp),
       child: GestureDetector(
         onTap: ()=>Get.toNamed(Routes.detail, arguments: {"member": member}),
+        onDoubleTap: ()=>_addOrReduceMemberCount(Get.context, member: member),
+        onLongPress: ()=>_deleteMember(Get.context),
         child: Slidable(
           actionPane: const SlidableDrawerActionPane(),//滑出选项的面板 动画
           actionExtentRatio: 0.25,
