@@ -14,17 +14,24 @@ class DetailController extends BaseController {
 
   RxList<MemberRecord> allRecord = RxList<MemberRecord>([]);
 
+  late Member member;
+
   // 加载数据
   void initAllMember(int id) async {
     allRecord.clear();
     allRecord.value = await ATQueueData.searchRecordDates(id);
+    allRecord.sort((a, b) {
+      DateTime aT = DateTime.parse(a.recordTime!);
+      DateTime bT = DateTime.parse(b.recordTime!);
+      return bT.compareTo(aT);
+    });
   }
 
   @override
   void onInit() async {
     var arguments = Get.arguments;
-    int id = arguments['id'];
-    initAllMember(id);
+    member = arguments['member'];
+    initAllMember(member.id);
     super.onInit();
   }
 }

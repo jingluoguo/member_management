@@ -69,7 +69,7 @@ class MainPage extends BasePage<MainController>{
     return Padding(
       padding: EdgeInsets.only(top: 10.dp, bottom: 10.dp),
       child: GestureDetector(
-        onTap: ()=>Get.toNamed(Routes.detail, arguments: {"id": member.id}),
+        onTap: ()=>Get.toNamed(Routes.detail, arguments: {"member": member}),
         child: Slidable(
           actionPane: const SlidableDrawerActionPane(),//滑出选项的面板 动画
           actionExtentRatio: 0.25,
@@ -278,6 +278,31 @@ class MainPage extends BasePage<MainController>{
                       children: [
                         SizedBox(
                             width: MediaQuery.of(context).size.width * 0.15,
+                            child: const Text("地址：",textAlign: TextAlign.right,)
+                        ),
+                        Expanded(child: TextField(
+                          keyboardType: TextInputType.text,
+                          onChanged: (v){
+                            controller.temAddMember.address = v;
+                          },
+                          decoration: InputDecoration.collapsed(
+                              hintText: '请输入地址',
+                              hintStyle: TextStyle(
+                                  color: c_AA,
+                                  fontSize: 16.sp
+                              )
+                          ),
+                        ))
+                      ],
+                    ),
+                  ),
+                  Get.getHeightBox(10.dp),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.15,
                             child: Text("${Translation.count}：",textAlign: TextAlign.right,)
                         ),
                         Expanded(child: TextField(
@@ -388,14 +413,8 @@ class MainPage extends BasePage<MainController>{
                           changeValue = 0;
                           return;
                         }
-                        print("到这里了？$v");
                         var value = int.parse(v);
                         changeValue = value.abs();
-                        if(add){
-                          print("新增积分:$v");
-                        } else {
-                          print("减少积分:$v");
-                        }
                       },
                       decoration: InputDecoration.collapsed(
                           hintText: "请输入${add ? "新增" : "兑换"}积分，默认为0",
@@ -433,7 +452,6 @@ class MainPage extends BasePage<MainController>{
                               }
                               member.count = member.count - changeValue;
                             }
-                            print("这里的最终值:${member.count}   $changeValue");
                             controller.updateMember(member, add? changeValue : (-changeValue), note: note);
                             Navigator.of(context).pop();
                           },
