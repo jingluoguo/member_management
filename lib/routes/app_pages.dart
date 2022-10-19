@@ -3,6 +3,8 @@ import 'package:member_management/modules/detail_module/detail_binding.dart';
 import 'package:member_management/modules/detail_module/detail_page.dart';
 import 'package:member_management/modules/main_modoule/main_binding.dart';
 import 'package:member_management/modules/main_modoule/main_page.dart';
+import 'package:member_management/modules/socket_module/socket_bindings.dart';
+import 'package:member_management/modules/socket_module/socket_page.dart';
 
 import '../modules/splash_module/splash_page.dart';
 import '../modules/splash_module/splash_bindings.dart';
@@ -26,6 +28,11 @@ abstract class AppPages {
         name: Routes.detail,
         page: ()=> const DetailPage(),
         binding: DetailBinding()
+    ),
+    GetPage(
+        name: Routes.socket,
+        page: ()=> SocketPage(),
+        binding: SocketBinding()
     ),
   ];
 }
