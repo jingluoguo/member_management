@@ -31,7 +31,7 @@ abstract class BasePage<T extends BaseController> extends GetView<T> {
                 decoration: boxDecoration,
                 child: Column(
                   children: [
-                    safePadding(context),
+                    safePadding(context, color: statusBgColor),
                     Expanded(child: body)
                   ],
                 ),
@@ -59,4 +59,6 @@ abstract class BasePage<T extends BaseController> extends GetView<T> {
       };
 
   Widget get body;
+
+  Color get statusBgColor => Colors.white;
 }

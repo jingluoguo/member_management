@@ -15,12 +15,13 @@ class SplashPage extends BasePage<SplashController> {
   SplashPage({Key? key}) : super(key: key);
 
   @override
-  Widget get body => Center(
-    child: Obx(()=>Text("${controller.x.value}")),
-  );
+  Widget get body => const SizedBox();
 
   @override
   BoxDecoration boxDecoration = BoxDecoration(
       color: c_1C9BD5
   );
+
+  @override
+  Color get statusBgColor => c_1C9BD5;
 }
