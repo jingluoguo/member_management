@@ -24,3 +24,4 @@ doc/api/
 ios/Podfile.lock
 .flutter-plugins-dependencies
 .flutter-plugins
+.idea
