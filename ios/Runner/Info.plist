@@ -43,5 +43,15 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>APP would like to use location service</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>APP would like to use location service</string>
+    <key>NSBonjourServices</key>
+    <array>
+        <string>_dartobservatory._tcp</string>
+    </array>
 </dict>
 </plist>
