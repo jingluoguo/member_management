@@ -350,6 +350,8 @@ class MainPage extends BasePage<MainController>{
                               if(controller.temAddMember.checkComplete()){
                                 controller.addMember();
                                 Navigator.of(context).pop();
+                              } else {
+                                Get.snackbar('提示', '填写不全,已填写信息:${controller.temAddMember.toJson()}');
                               }
                             },
                             child: singleTextWeight(Translation.confirm, c_5ADBEA, 18.dp, fontWeight: FontWeight.normal)

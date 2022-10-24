@@ -54,6 +54,8 @@ dependencies:
 
   r_logger: ^0.2.4
 
+  intl: ^0.17.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
