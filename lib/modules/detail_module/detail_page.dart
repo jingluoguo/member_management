@@ -17,33 +17,6 @@ import 'package:member_management/data/model/member.dart';
 class DetailPage extends BasePage<DetailController> {
   const DetailPage({Key? key}) : super(key: key);
 
-  @override
-  Widget get body => Stack(
-        children: [
-          Column(
-            children: [
-              customerHeader(Colors.white, Translation.pointsRecord,
-                  leftContent: GestureDetector(
-                    onTap: () => Get.back(),
-                    child: Icon(
-                      Icons.arrow_back_ios,
-                      size: 28.dp,
-                    ),
-                  )),
-              memberInfo(controller.member),
-              Expanded(
-                  child: SingleChildScrollView(
-                child: Obx(() => Column(
-                      children: [
-                        for (var record in controller.allRecord)
-                          memberRecordCard(record),
-                      ],
-                    )),
-              ))
-            ],
-          ),
-        ],
-      );
 
   Widget memberInfo(Member member) {
     return Container(
@@ -168,5 +141,35 @@ class DetailPage extends BasePage<DetailController> {
             ],
           ),
         ));
+  }
+
+  @override
+  Widget buildBody(BuildContext context) {
+    return Stack(
+      children: [
+        Column(
+          children: [
+            customerHeader(Colors.white, Translation.pointsRecord,
+                leftContent: GestureDetector(
+                  onTap: () => Get.back(),
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    size: 28.dp,
+                  ),
+                )),
+            memberInfo(controller.member),
+            Expanded(
+                child: SingleChildScrollView(
+                  child: Obx(() => Column(
+                    children: [
+                      for (var record in controller.allRecord)
+                        memberRecordCard(record),
+                    ],
+                  )),
+                ))
+          ],
+        ),
+      ],
+    );
   }
 }

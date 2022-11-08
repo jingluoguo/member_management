@@ -18,50 +18,63 @@ class MainPage extends BasePage<MainController> {
   const MainPage({Key? key}) : super(key: key);
 
   @override
-  // TODO: implement body
-  Widget get body => Stack(
-        children: [
-          Column(
-            children: [
-              customerHeader(
+  Widget? get drawer => Container(
+    height: double.infinity,
+    width: 200,
+    color: Colors.white,
+    child: Text('ssss'),
+  );
+
+  @override
+  Widget buildBody(BuildContext context){
+    return Stack(
+      children: [
+        Column(
+          children: [
+            customerHeader(
                 Colors.white,
                 Translation.memberList,
-              ),
-              Get.getHeightBox(10.dp),
-              SizedBox(
-                width: Get.width * 0.9,
-                child: TextField(
-                  onChanged: (v) {
-                    controller.searchMember(v);
-                  },
-                  decoration: InputDecoration.collapsed(
-                      hintText: Translation.searchHintText,
-                      hintStyle: TextStyle(color: c_AA, fontSize: 16.sp)),
-                ),
-              ),
-              Expanded(
-                  child: SingleChildScrollView(
-                child: Obx(() => Column(
-                      children: [
-                        for (var member in controller.resultMember)
-                          memberCard(member),
-                      ],
-                    )),
-              ))
-            ],
-          ),
-          Positioned(
-              bottom: 50.dp,
-              right: 20.dp,
-              child: FloatingActionButton(
-                onPressed: () async {
-                  controller.temAddMember.clear();
-                  await _addMember(Get.context);
+                leftContent: GestureDetector(
+                  onTap: ()=>Scaffold.of(context).openDrawer(),
+                  child: const Icon(Icons.ac_unit),
+                )
+            ),
+            Get.getHeightBox(10.dp),
+            SizedBox(
+              width: Get.width * 0.9,
+              child: TextField(
+                onChanged: (v) {
+                  controller.searchMember(v);
                 },
-                child: const Icon(Icons.add),
-              )),
-        ],
-      );
+                decoration: InputDecoration.collapsed(
+                    hintText: Translation.searchHintText,
+                    hintStyle: TextStyle(color: c_AA, fontSize: 16.sp)),
+              ),
+            ),
+            Expanded(
+                child: SingleChildScrollView(
+                  child: Obx(() => Column(
+                    children: [
+                      for (var member in controller.resultMember)
+                        memberCard(member),
+                    ],
+                  )),
+                ))
+          ],
+        ),
+        Positioned(
+            bottom: 50.dp,
+            right: 20.dp,
+            child: FloatingActionButton(
+              onPressed: () async {
+                controller.temAddMember.clear();
+                await _addMember(Get.context);
+              },
+              child: const Icon(Icons.add),
+            )),
+      ],
+    );
+  }
 
   Widget memberCard(Member member) {
     return Padding(

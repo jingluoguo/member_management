@@ -23,19 +23,24 @@ abstract class BasePage<T extends BaseController> extends GetView<T> {
       child: WillPopScope(
         child: Scaffold(
             resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-            body: GestureDetector(
-              onTap: onTap,
-              child: Container(
-                height: double.infinity,
-                width: double.infinity,
-                decoration: boxDecoration,
-                child: Column(
-                  children: [
-                    safePadding(context, color: statusBgColor),
-                    Expanded(child: body)
-                  ],
-                ),
-              ),
+            drawer: drawer,
+            body: Builder(
+              builder: (BuildContext context){
+                return GestureDetector(
+                  onTap: onTap,
+                  child: Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    decoration: boxDecoration,
+                    child: Column(
+                      children: [
+                        safePadding(context, color: statusBgColor),
+                        Expanded(child: buildBody(context))
+                      ],
+                    ),
+                  ),
+                );
+              },
             )),
         onWillPop: onWillPop,
       ),
@@ -58,7 +63,11 @@ abstract class BasePage<T extends BaseController> extends GetView<T> {
         return Get.global(null).currentState?.canPop() == true;
       };
 
-  Widget get body;
+  void Function(BuildContext context) get onScaffoldTap => (BuildContext context){};
+
+  Widget? get drawer => null;
+
+  Widget buildBody(BuildContext context);
 
   Color get statusBgColor => Colors.white;
 }

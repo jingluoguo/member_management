@@ -14,8 +14,6 @@ import '../../utils/widget/common.dart';
 class SplashPage extends BasePage<SplashController> {
   SplashPage({Key? key}) : super(key: key);
 
-  @override
-  Widget get body => const SizedBox();
 
   @override
   BoxDecoration boxDecoration = BoxDecoration(
@@ -24,4 +22,9 @@ class SplashPage extends BasePage<SplashController> {
 
   @override
   Color get statusBgColor => c_1C9BD5;
+
+  @override
+  Widget buildBody(BuildContext context) {
+    return const SizedBox();
+  }
 }
